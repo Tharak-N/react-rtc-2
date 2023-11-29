@@ -1,0 +1,11 @@
+
+.meeting-container-screen {
+  position: fixed;
+  inset: 0;
+}
+
+.meeting-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
