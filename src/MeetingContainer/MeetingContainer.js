@@ -1,7 +1,7 @@
 import { createRef, useEffect, useState } from "react";
 import WaitingScreen from "../WaitingScreen/WaitingScreen";
 import { useMeeting } from "@videosdk.live/react-sdk";
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 import Controls from "../Controls/Controls";
 import './MeetingContainer.css'
 import ParticipantsPlaygroundHouse from "../ParticipantsPlaygroundHouse/ParticipantsPlaygroundHouse";
@@ -17,12 +17,13 @@ export default function MeetingContainer({
       // setting timeout for cold start
       setTimeout(() => {
         updateJoinFlag('JOINED')
-      }, 2000)
+      }, 1000)
     },
-    onParticipantJoined: () => {
+    onParticipantJoined: (participant) => {
+      participant && participant.setQuality("high")
       setTimeout(() => {
         updateJoinFlag('JOINED')
-      }, 2000)
+      }, 1000)
     }
   })
 
@@ -30,11 +31,11 @@ export default function MeetingContainer({
    * Subscribing to the CSS media query changes for providing responsiveness to change in the view 
    * @return true if this screen view matches the provided condition value 
    */
-  const isMobile = useMediaQuery({ maxWidth: 767 })
-  const isTab = useMediaQuery({ minWidth: 768, maxWidth: 1223 });
-  const isLGDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1439 })
-  const isXLDesktop = useMediaQuery({ minWidth: 1440 });
-  const sideBarWidth = isXLDesktop ? 400 : isLGDesktop ? 360 : isTab ? 320 : isMobile ? 280 : 240; 
+  // const isMobile = useMediaQuery({ maxWidth: 767 })
+  // const isTab = useMediaQuery({ minWidth: 768, maxWidth: 1223 });
+  // const isLGDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1439 })
+  // const isXLDesktop = useMediaQuery({ minWidth: 1440 });
+  // const sideBarWidth = isXLDesktop ? 400 : isLGDesktop ? 360 : isTab ? 320 : isMobile ? 280 : 240; 
 
   // join the meeting immediately without any step procedure
   useEffect(() => {

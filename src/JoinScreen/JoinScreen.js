@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './JoinScreen.css'
 
-export default function JoinScreen({ connectToMeeting, updateMeetingStartFlag }) {
+export default function JoinScreen({ connectToMeeting, updateMeetingStartFlag, joinMeet }) {
   // let elemRef = useRef();
   // let [user, setUser] = useState('ADMIN')
   let [id, updateId] = useState('');
@@ -9,7 +9,8 @@ export default function JoinScreen({ connectToMeeting, updateMeetingStartFlag })
   // let meetingInputValue = 'Good Game'
 
   const joinMeeting = async () => {
-    await connectToMeeting(id)
+    // await connectToMeeting()
+    joinMeet()
     updateMeetingStartFlag(true)
   }
   
@@ -18,7 +19,7 @@ export default function JoinScreen({ connectToMeeting, updateMeetingStartFlag })
   }
 
   const createMeeting = async () => {
-    await connectToMeeting(id)
+    await connectToMeeting()
     updateMeetingStartFlag(true)
   }
 
