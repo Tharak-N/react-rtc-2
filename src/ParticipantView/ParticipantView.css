@@ -1,16 +1,14 @@
 
 
-.video-cover {
-  height: 100%;
-  width: 100%;
+.participant-video-cover {
   position: relative;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
-.video-cover div video {
-  object-fit: cover;
-  border-radius: 15px;
-  transform: scaleX(-1);
+.participant-video-cover div video {
+  border: 2.5px solid rgb(255, 255, 255);
 }
 
 .participant-image-section {
@@ -18,9 +16,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  height: 100%;
-  width: 100%;
+  height: 134px;
+  width: 227px;
   background-color: #414141;
+  border: 2.5px solid rgb(255, 255, 255);
+  margin-bottom: 5px;
 }
 
 .participant-display-image {
@@ -32,15 +32,7 @@
   z-index: 10;
 }
 
-.name {
-  font-size: 1.5rem; 
-  line-height: 2rem;
-  color: white;
-  margin: 0;
-  padding: 0;
-}
-
-.h-52{
+.h-52 {
   height: 52px;
 }
 
@@ -48,24 +40,10 @@
   width: 52px;
 }
 
-@media (min-width: 768px){
-  .participant-image-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    height: 100%;
-    width: 100%;
-    background-color: #414141;
-  }
-}
-
-@media(min-width: 1536px){
-  .h-2xl {
-    height: 92px;
-  }
-
-  .w-2xl {
-    width: 92px;
-  }
+.participant-name {
+  font-size: 1.5rem; 
+  line-height: 2rem;
+  color: white;
+  margin: 0;
+  padding: 0;
 }

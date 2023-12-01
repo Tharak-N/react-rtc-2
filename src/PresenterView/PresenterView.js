@@ -2,12 +2,12 @@ import { useParticipant } from "@videosdk.live/react-sdk";
 import { useEffect, useMemo, useRef } from "react";
 import ReactPlayer from "react-player";
 import DisplayName from "../DisplayName/DisplayName";
-import './ParticipantView.css'
+import './PresenterView.css'
+import Attendees from "../Attendees/Attendees";
 
-export default function ParticipantView({ participantId }) {
- 
+export default function PresenterView({ presenterId, attendees }) {
   const onMediaStatusChanged = (data) => {
-    const { kind, newStatus } = data;
+    let { kind, newStatus } = data;
     kind === 'audio' ? micOn = newStatus : webcamOn = newStatus
   }
 
@@ -18,9 +18,8 @@ export default function ParticipantView({ participantId }) {
     webcamOn,
     micOn,
     isLocal,
-    // mode,
     isActiveSpeaker, 
-   } = useParticipant(participantId, { onMediaStatusChanged })
+   } = useParticipant(presenterId, { onMediaStatusChanged })
 
    const micRef = useRef();
 
@@ -49,7 +48,7 @@ export default function ParticipantView({ participantId }) {
 
    return (
     <>
-    <div className="video-cover"
+    <div className="presenter-video-cover"
      > 
       <audio ref={micRef} autoPlay muted={isLocal} />
       {
@@ -67,21 +66,35 @@ export default function ParticipantView({ participantId }) {
               width={"100%"}
             />
           ) : (
-              <div className="participant-image-section">
-                <div className={`participant-display-image h-52 h-2xl w-52 w-2xl`}>
-                  <p className="name">{ String(displayName).charAt(0).toUpperCase() }</p>
+              <div className="presenter-image-section">
+                <div className={`presenter-display-image h-52 h-2xl w-52 w-2xl`}>
+                  <p className="presenter-name">{ String(presenterId).charAt(0).toUpperCase() }</p>
                 </div>
               </div>
             )
           }
       <DisplayName
         isLocal={isLocal}
-        displayName={displayName}
+        displayName={presenterId}
         micOn={micOn}
         webcamOn={webcamOn}
-        participantId={participantId}
+        participantId={presenterId}
         isActiveSpeaker={isActiveSpeaker}
       />
+
+      {
+        attendees.length >= 1 ? (
+          <>
+            <Attendees 
+              attendees={attendees}
+            />
+          </>
+        ) : (
+          <></>
+        )
+      }
+
+      
     </div>
   </>
    )

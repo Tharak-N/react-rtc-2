@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Meeting.css'
-import { MeetingProvider } from '@videosdk.live/react-sdk';
+import { MeetingProvider, createCameraVideoTrack } from '@videosdk.live/react-sdk';
 import JoinScreen from '../JoinScreen/JoinScreen'
 
 import { createMeeting } from '../API';
 import MeetingContainer from '../MeetingContainer/MeetingContainer';
 
 export default function Meeting(){
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJlYTE4YTI5Yy0xNDMzLTRlYTktYTkzZS00MTdmNzhmZTAyMzMiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcwMTE1NTA3MSwiZXhwIjoxODU4OTQzMDcxfQ.sHQ4OBsq_e31vECXqx1H165-v70Wtu95hRGoeJYjpKU"
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJlYTE4YTI5Yy0xNDMzLTRlYTktYTkzZS00MTdmNzhmZTAyMzMiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcwMTQwODczNiwiZXhwIjoxNzAxNDI2NzM2fQ.YZeMCPjJntxGmL1zEcaIJROLmx9XuwjtH9R40DoHSjY"
   let initialMeetConfig = {
     meetingId: null,
     micEnabled: false,
@@ -18,6 +18,21 @@ export default function Meeting(){
   let [meetingConfig, updateMeetingConfig] = useState(initialMeetConfig);
   let [isMeetingLeft, updateMeetingLeftFlag] = useState(false);
   let [isMeetingStart, updateMeetingStartFlag] = useState(false);
+  let [customVideoTrack, setCustomTrack] = useState(null);
+
+  const getTrack = async () => {
+    const track = await createCameraVideoTrack({
+      optimizationMode: "motion",
+      encoderConfig: "h2160p_w3840p",
+      facingMode: "front",
+      // multiStream: true,
+    });
+    setCustomTrack(track);
+  };
+
+  useEffect(() => {
+    // getTrack()
+  }, [])
 
   const connectToMeeting = async (meetId) => {
     let id = localStorage.getItem("roomId") ?? null
@@ -34,7 +49,7 @@ export default function Meeting(){
       meetingId: roomId,
       micEnabled: true,
       webcamEnabled: true,
-      multiStream: true,
+      customCameraVideoTrack: customVideoTrack, 
       name: 'Avighna',
     })
   } 
@@ -50,7 +65,7 @@ export default function Meeting(){
             ></JoinScreen>
           ) : !isMeetingLeft ? (
             <>
-              <MeetingProvider 
+              <MeetingProvider
                 config={meetingConfig} 
                 token={token} 
               >
@@ -59,7 +74,7 @@ export default function Meeting(){
                 />
               </MeetingProvider> 
             </>
-          ) : <p>Left meeting</p>
+          ) : <p>Meeting Ended</p>
         }
       </div>
     </>

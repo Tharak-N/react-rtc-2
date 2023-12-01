@@ -1,7 +1,6 @@
 import { createRef, useEffect, useState } from "react";
 import WaitingScreen from "../WaitingScreen/WaitingScreen";
 import { useMeeting } from "@videosdk.live/react-sdk";
-// import SideBarContainer from "../SideBar/SideBarContainer";
 import { useMediaQuery } from "react-responsive";
 import Controls from "../Controls/Controls";
 import './MeetingContainer.css'
@@ -10,15 +9,20 @@ import ParticipantsPlaygroundHouse from "../ParticipantsPlaygroundHouse/Particip
 export default function MeetingContainer({
   updateMeetingLeftFlag
 }){
-  const [containerHeight, updateContainerHeight] = useState(0);
-  const [containerWidth, updateContainerWidth] = useState(0);
+  // const [containerHeight, updateContainerHeight] = useState(0);
+  // const [containerWidth, updateContainerWidth] = useState(0);
   let [joinFlag, updateJoinFlag] = useState('JOINING');
   const { join } = useMeeting({
     onMeetingJoined: () => {
-      updateJoinFlag('JOINED')
+      // setting timeout for cold start
+      setTimeout(() => {
+        updateJoinFlag('JOINED')
+      }, 2000)
     },
     onParticipantJoined: () => {
-      updateJoinFlag('JOINED')
+      setTimeout(() => {
+        updateJoinFlag('JOINED')
+      }, 2000)
     }
   })
 
@@ -40,15 +44,15 @@ export default function MeetingContainer({
   const containerRef = createRef();
 
   // whenever there is change in the width / height of the container
-  useEffect(() => {
-    if(containerRef.current?.offsetHeight) updateContainerHeight(containerRef.current?.offsetHeight)
-    if(containerRef.current?.offsetWidth) updateContainerWidth(containerRef.current?.offsetWidth)
+  // useEffect(() => {
+  //   if(containerRef.current?.offsetHeight) updateContainerHeight(containerRef.current?.offsetHeight)
+  //   if(containerRef.current?.offsetWidth) updateContainerWidth(containerRef.current?.offsetWidth)
 
-    window.addEventListener('resize', ({ target }) => {
-      if(containerRef.current?.offsetHeight) updateContainerHeight(containerRef.current?.offsetHeight)
-      if(containerRef.current?.offsetWidth) updateContainerWidth(containerRef.current?.offsetWidth)
-    })
-  }, [containerRef])
+  //   window.addEventListener('resize', ({ target }) => {
+  //     if(containerRef.current?.offsetHeight) updateContainerHeight(containerRef.current?.offsetHeight)
+  //     if(containerRef.current?.offsetWidth) updateContainerWidth(containerRef.current?.offsetWidth)
+  //   })
+  // }, [containerRef])
 
 
   return (
@@ -68,10 +72,6 @@ export default function MeetingContainer({
                   <div className="d-flex flex-row flex-grow-1">
                     <ParticipantsPlaygroundHouse />
                   </div>
-                  {/* <SideBarContainer 
-                    width={sideBarWidth}
-                    height={containerHeight}
-                  /> */}
                 </div>
                 <Controls
                   updateMeetingLeftFlag={updateMeetingLeftFlag}
