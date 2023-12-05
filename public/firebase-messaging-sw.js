@@ -1,3 +1,4 @@
+// Service worker file for receving push notifications
 
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
@@ -18,12 +19,13 @@ const app = initializeApp(firebaseConfig);
 // intialiing firebase cloud message
 const messaging = getMessaging(app);
 
+
 // registration token for app instance 
 export const requestToken = async () => {
   console.log("reaching token")
-  // const swk = await navigator.serviceWorker.register('../public/firebase-messaging-sw')
-  // console.log(swk)
-  return getToken(messaging, { vapidKey: 'L9l0fADuw42dHL2ielrrEX3OlajZYyLMW-HVRVMsCow' }).then((token) => {
+  const swk = await navigator.serviceWorker.register('../firebase-messaging-sw.js')
+  console.log(swk)
+  return getToken(messaging, { vapidKey: 'L9l0fADuw42dHL2ielrrEX3OlajZYyLMW-HVRVMsCow', serviceWorkerRegistration: swk }).then((token) => {
     if(token){
       console.log("the user token is", token)
     }
