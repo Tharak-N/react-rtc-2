@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import Controls from "../Controls/Controls";
 import './MeetingContainer.css'
 import ParticipantsPlaygroundHouse from "../ParticipantsPlaygroundHouse/ParticipantsPlaygroundHouse";
+import Notification from "../Notification";
 
 export default function MeetingContainer({
   updateMeetingLeftFlag
@@ -72,6 +73,7 @@ export default function MeetingContainer({
                     width={sideBarWidth}
                     height={containerHeight}
                   /> */}
+                   <Notification />
                 </div>
                 <Controls
                   updateMeetingLeftFlag={updateMeetingLeftFlag}

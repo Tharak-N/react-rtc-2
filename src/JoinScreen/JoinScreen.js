@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './JoinScreen.css'
+import { requestNotificationAccess } from '../Firebase/firebase'
 
 export default function JoinScreen({ connectToMeeting, updateMeetingStartFlag }) {
   // let elemRef = useRef();
@@ -18,8 +19,10 @@ export default function JoinScreen({ connectToMeeting, updateMeetingStartFlag })
   }
 
   const createMeeting = async () => {
+    requestNotificationAccess()
     await connectToMeeting(id)
-    updateMeetingStartFlag(true)
+    // setTimeout(() => {
+    // }, 2000)
   }
 
   return (
