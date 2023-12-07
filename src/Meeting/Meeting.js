@@ -7,7 +7,7 @@ import { createMeeting } from '../API';
 import MeetingContainer from '../MeetingContainer/MeetingContainer';
 
 export default function Meeting(){
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJlYTE4YTI5Yy0xNDMzLTRlYTktYTkzZS00MTdmNzhmZTAyMzMiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcwMTQwODczNiwiZXhwIjoxNzAxNDI2NzM2fQ.YZeMCPjJntxGmL1zEcaIJROLmx9XuwjtH9R40DoHSjY"
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJlYTE4YTI5Yy0xNDMzLTRlYTktYTkzZS00MTdmNzhmZTAyMzMiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcwMTkyNzY2OCwiZXhwIjoxODU5NzE1NjY4fQ.WkTyLXeH9brVRNbV2I6fYKfhsvQ5qf87njnrz-uAFW0"
   let initialMeetConfig = {
     meetingId: null,
     micEnabled: false,
